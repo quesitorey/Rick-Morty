@@ -1,0 +1,70 @@
+.character{
+  background: #131a20;
+  max-width: 250px;
+  width: 100%;
+  color: white;
+  border-radius: 1rem;
+  overflow:hidden;
+  transition: transform 200ms ease;
+}
+.character:hover{
+  transform: scale(1.05)
+}
+.character-header{
+  position: relative;
+}
+.character-image{
+  width: 100%;
+}
+.character-status-box{
+  display: flex;
+  align-items: center;
+  width: 40%;
+  background-color: #1A262C;
+  position: absolute;
+  top: 1.5rem;
+  left: 0;
+  padding: .25rem;
+  border-radius: 0 .5rem .5rem 0;
+}
+.character-circle-status{
+  width: 1em;
+  background-color: gray;
+  aspect-ratio: 1;
+  margin: 5px 10px;
+  border-radius: 50%;
+}
+.Alive{
+  width: 1em;
+  background: green;
+}
+.Dead{
+  width: 1em;
+  background: red;
+}
+.character-body{
+  padding: 1em .8em 2em;
+}
+.character-name{
+  color: lightgreen;
+  text-align: center;
+}
+.character-line{
+  margin: 0.6em 0 1em 0;
+  border-color: #aaa5;
+}
+.character-info{
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-left: 1rem;
+}
+.character-list{
+  display:grid;
+  gap: 0.5rem;
+  list-style: none;
+}
+.character-label{
+  color: #aaa;
+  font-weight: 300;
+}
