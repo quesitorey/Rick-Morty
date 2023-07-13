@@ -1,19 +1,23 @@
 import './App.css'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-
+import img from '/fondo.png'
 import getRandomNum from './utils/getRandomNum'
 import LocationInfo from './components/LocationInfo'
 import Character from './components/Character'
 import Form from './components/Form'
-  
+import Loader from './components/Loader'
+import Error from './components/Error'
+
 export default function App() {
 
 const [ location, setLocation ] = useState([])
 const [ idLocation, setIdLocation ] = useState(getRandomNum(126))
 const [ hasError, setHasError ] = useState(false)
-const [ isLading, setIsLoading ] = useState(true)
+const [ isLoading, setIsLoading ] = useState(true)
+  
 useEffect(() => {
+    setIsLoading(true)
   axios
     .get(`https://rickandmortyapi.com/api/location/${idLocation}`)
     .then( resp => {
@@ -24,33 +28,40 @@ useEffect(() => {
       console.error(err) 
       setHasError(true)
     })
+    .finally(() => setIsLoading(false))
 }, [idLocation])
   
   return (
     <>
-      <Form
-      location={ setIdLocation }  
-      />
       { 
-        hasError
-        ?
-        ( <h2>Hey you must provide a number from 1 to 126</h2> ) 
-        :
-        (
-          <>
-            <LocationInfo
-            location={ location }  
-            />
-            <div className='character-container'>
-              { 
-                location.residents?.map(resident =>(
-                  <Character
-                  character={ resident }
-                  />
-                ))
-              }
-            </div>     
-          </>
+        isLoading
+        ? (<Loader/>)
+        : (
+            hasError
+            ?
+            ( <Error/> ) 
+            :
+            (
+              <>
+                <img className='img' src="fondo.png"/>
+                <Form
+                 location={ setIdLocation }  
+                 />
+                <LocationInfo
+                location={ location }  
+                />
+                <div className='character-container'>
+                  { 
+                    location.residents?.map(resident =>(
+                      <Character
+                      character={ resident }
+                      />
+                    ))
+                  }
+                </div>     
+              </>
+            )
+          
         )
       }
       
